@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">{{request.user}}</th>
+    </tr>
+  </thead>
+  <tbody>
+  	{% for i in detail %}
+    <tr>
+      <th scope="row">Total</th>
+      <td>{{i.total}}</td>
+    </tr>
+    <tr>
+      <th scope="row">Invoice</th>
+      <td><a href="{{i.invoice.url}}">Invoice</a></td>
+    </tr>
+    {% if i.sold %}
+    <tr>
+      <th scope="row">Sold</th>
+      <td>{{i.sold}}</td>
+    </tr>
+    <tr>
+      <th scope="row">Remaining</th>
+      <td>{{i.remaining}}</td>
+    </tr>
+    {% endif %}
+    {% endfor %}
+  </tbody>
+</table>
+
+
+<br><br><br>
+<form action="" method="post">
+    {% csrf_token %}
+    {{ form }}
+    <input type="submit" value="Submit">
+</form>
+
+{% endblock %}
